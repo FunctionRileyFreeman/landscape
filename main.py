@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.patches import Circle, Ellipse, Rectangle
+import random
 
 # Set the backend explicitly
 import matplotlib
@@ -49,27 +50,20 @@ def create_landscape():
     ax.add_patch(mountain2)
 
     # Draw trees
-    draw_tree(ax, -150, -50)
-    draw_tree(ax, 50, -50)
-    draw_tree(ax, -20, -30)
-
-    # Draw broken trees (flags)
-    draw_tree(ax, -180, -100, trunk_color='brown', leaf_color='red')
-    draw_tree(ax, -160, -100, trunk_color='brown', leaf_color='red')
+    for _ in range(10):
+        draw_tree(ax, random.randint(-200, 200), random.randint(-100, -50))
 
     # Draw clouds
-    draw_cloud(ax, -100, 70)
-    draw_cloud(ax, 100, 100)
+    for _ in range(3):
+        draw_cloud(ax, random.randint(-200, 200), random.randint(50, 100))
 
     # Draw river
     river = Rectangle((-200, -100), 400, 50, color='blue')
     ax.add_patch(river)
 
     # Draw flowers
-    draw_flower(ax, -100, -70)
-    draw_flower(ax, -50, -80)
-    draw_flower(ax, 80, -60)
-    draw_flower(ax, 100, -80)
+    for _ in range(5):
+        draw_flower(ax, random.randint(-200, 200), random.randint(-100, 0))
 
     # Set axis limits and remove ticks
     ax.set_xlim(-200, 200)

@@ -1,0 +1,78 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.patches import Rectangle, Ellipse, Polygon
+import random
+
+# Set the backend explicitly
+import matplotlib
+matplotlib.use('TkAgg')
+
+# Define abstract colors with higher saturation
+sky_color = "#00CCFF"       # Sky blue
+ground_color = "#FFCC66"    # Light orange
+river_color = "#00FFFF"     # Cyan
+mountain_color = "#999999"  # Gray
+tree_color = "#66FF33"      # Bright green
+flower_color = "#FF6666"    # Pink
+cloud_color = "#FFFFFF"     # White
+
+# Create a function to draw a tree
+def draw_tree(ax, x, y):
+    # Draw tree canopy
+    canopy = Ellipse((x, y), 40, 20, color=tree_color, alpha=0.6)
+    ax.add_patch(canopy)
+
+# Create a function to draw a cloud
+def draw_cloud(ax, x, y, size):
+    cloud = Ellipse((x, y), size, size / 2, color=cloud_color, alpha=0.8)
+    ax.add_patch(cloud)
+
+# Create a function to draw a flower
+def draw_flower(ax, x, y):
+    petals = Polygon([(x, y + 10), (x + 5, y + 15), (x, y + 20), (x - 5, y + 15)], closed=True, color=flower_color, alpha=0.6)
+    ax.add_patch(petals)
+
+# Create landscape
+def create_landscape():
+    fig, ax = plt.subplots()
+
+    # Draw sky
+    sky = Rectangle((-200, -100), 400, 200, color=sky_color)
+    ax.add_patch(sky)
+
+    # Draw ground
+    ground = Rectangle((-200, -100), 400, 200, color=ground_color)
+    ax.add_patch(ground)
+
+    # Draw river
+    river = Rectangle((-200, -100), 400, 100, color=river_color, alpha=0.4)
+    ax.add_patch(river)
+
+    # Draw mountains
+    mountain1 = Polygon([(-200, -100), (-150, 100), (-100, -100)], color=mountain_color, alpha=0.6)
+    ax.add_patch(mountain1)
+    mountain2 = Polygon([(100, -100), (150, 100), (200, -100)], color=mountain_color, alpha=0.6)
+    ax.add_patch(mountain2)
+
+    # Draw trees
+    for _ in range(15):
+        draw_tree(ax, random.randint(-200, 200), random.randint(-100, 0))
+
+    # Draw clouds
+    for _ in range(5):
+        draw_cloud(ax, random.randint(-200, 200), random.randint(50, 100), random.randint(30, 50))
+
+    # Draw flowers
+    for _ in range(20):
+        draw_flower(ax, random.randint(-200, 200), random.randint(-100, -50))
+
+    # Set axis limits and remove ticks
+    ax.set_xlim(-200, 200)
+    ax.set_ylim(-100, 100)
+    ax.set_xticks([])
+    ax.set_yticks([])
+
+    plt.show()
+
+# Create landscape
+create_landscape()
